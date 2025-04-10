@@ -8,9 +8,12 @@ import argparse
 from PIL import Image
 import re
 import json
+from moviepy.config import change_settings
 
 # 配置 ImageMagick
-os.environ['IMAGEMAGICK_BINARY'] = '/opt/homebrew/bin/convert'
+# os.environ['IMAGEMAGICK_BINARY'] = '/usr/bin/convert'
+change_settings({"IMAGEMAGICK_BINARY": "/opt/homebrew/bin/convert"})
+
 
 logger = logging.getLogger(__name__)
 
