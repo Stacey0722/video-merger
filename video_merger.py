@@ -188,7 +188,7 @@ class VideoGenerator:
         try:
             # 字体和大小
             font_size = 45
-            font_path = "/System/Library/Fonts/STHeiti Medium.ttc"  # macOS 下 STHeiti 字体路径
+            font_path = "/C:/Windows/Fonts/simhei.ttf"  # macOS 下 STHeiti 字体路径
             font = ImageFont.truetype(font_path, font_size)
 
             # 创建透明背景图片
