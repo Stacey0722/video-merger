@@ -11,8 +11,9 @@ import json
 from moviepy.config import change_settings
 
 # 配置 ImageMagick
-# os.environ['IMAGEMAGICK_BINARY'] = '/opt/homebrew/bin/convert'
-change_settings({"IMAGEMAGICK_BINARY": "/usr/bin/convert"})
+# os.environ['IMAGEMAGICK_BINARY'] = '/usr/bin/convert'
+change_settings({"IMAGEMAGICK_BINARY": "/opt/homebrew/bin/convert"})
+
 
 logger = logging.getLogger(__name__)
 
@@ -212,7 +213,7 @@ class VideoGenerator:
             
             # 使用 PIL 的 BILINEAR 重采样方法（更快但质量稍低）
             from PIL import Image
-            image = image.resize((w, h), Image.Resampling.LANCZOS)
+            Image.Resampling = Image.Resampling.BILINEAR
             
             # 调整视频大小
             video = video.resize((target_width, target_height))
