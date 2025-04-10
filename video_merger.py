@@ -4,11 +4,11 @@ import asyncio
 import edge_tts
 from moviepy.editor import VideoFileClip, AudioFileClip, concatenate_videoclips, CompositeVideoClip, CompositeAudioClip, TextClip, ColorClip, concatenate_audioclips, ImageClip
 import logging
-import argparse
-from PIL import Image
+import numpy as np
 import re
 import json
 from moviepy.config import change_settings
+from PIL import Image, ImageDraw, ImageFont
 
 # 配置 ImageMagick
 # os.environ['IMAGEMAGICK_BINARY'] = '/usr/bin/convert'
@@ -154,30 +154,80 @@ class VideoGenerator:
             logger.error(f"语音生成失败: {str(e)}")
             raise
 
+    # def create_subtitle_clip(self, text, start_time, end_time, video_size):
+    #     """创建字幕剪辑"""
+    #     try:
+    #         text = text.strip()
+            
+    #         logger.info(f"创建字幕: 文本='{text}', 开始时间={start_time}, 结束时间={end_time}, 视频尺寸={video_size}, 字体={self.font}")
+            
+    #         # 创建字幕文本（优化字幕参数）
+    #         txt_clip = TextClip(
+    #             text,
+    #             fontsize=45,  # 字体大小
+    #             color='white',  # 白色字体
+    #             font=self.font,  # 使用用户选择的字体
+    #             #stroke_color='white',  # 黑色描边
+    #             #stroke_width=3,  # 增加描边宽度，使字幕更加清晰可见
+    #             size=(video_size[0], video_size[1]),
+    #             method='label',  # 使用caption方法以获得更好的渲染效果
+    #             align='center',
+    #             transparent=True
+    #         ).set_position(('center', 0.8), relative=True)
+            
+    #         txt_clip = txt_clip.set_start(start_time)
+    #         txt_clip = txt_clip.set_duration(end_time - start_time)
+            
+    #         return txt_clip
+    #     except Exception as e:
+    #         logger.error(f"创建字幕失败: {str(e)}")
+    #         raise
+
     def create_subtitle_clip(self, text, start_time, end_time, video_size):
-        """创建字幕剪辑"""
+        """用 PIL 手动生成带描边的白色字幕 ImageClip"""
         try:
+            # 字体和大小
+            font_size = 45
+            font_path = "/System/Library/Fonts/STHeiti Medium.ttc"  # macOS 下 STHeiti 字体路径
+            font = ImageFont.truetype(font_path, font_size)
+
+            # 创建透明背景图片
+            img = Image.new("RGBA", video_size, (0, 0, 0, 0))  # RGBA透明背景
+            draw = ImageDraw.Draw(img)
+
+            # 测量文本尺寸并居中绘制
             text = text.strip()
-            
-            logger.info(f"创建字幕: 文本='{text}', 开始时间={start_time}, 结束时间={end_time}, 视频尺寸={video_size}, 字体={self.font}")
-            
-            # 创建字幕文本（优化字幕参数）
-            txt_clip = TextClip(
+            text_size = draw.textbbox((0, 0), text, font=font)
+            text_width = text_size[2] - text_size[0]
+            text_height = text_size[3] - text_size[1]
+            position = ((video_size[0] - text_width) // 2, int(video_size[1] * 0.5))  # 居中偏下
+
+            # 绘制黑色描边
+            stroke_width = 3  # 描边宽度
+            for dx in range(-stroke_width, stroke_width + 1):
+                for dy in range(-stroke_width, stroke_width + 1):
+                    if dx*dx + dy*dy <= stroke_width*stroke_width:  # 圆形描边
+                        draw.text(
+                            (position[0] + dx, position[1] + dy),
+                            text,
+                            font=font,
+                            fill=(0, 0, 0, 255)  # 黑色描边
+                        )
+
+            # 绘制白色文字
+            draw.text(
+                position,
                 text,
-                fontsize=45,  # 字体大小
-                color='white',  # 白色字体
-                font=self.font,  # 使用用户选择的字体
-                #stroke_color='white',  # 黑色描边
-                #stroke_width=3,  # 增加描边宽度，使字幕更加清晰可见
-                size=(video_size[0], video_size[1]),
-                method='caption',  # 使用caption方法以获得更好的渲染效果
-                align='center',
-                transparent=True
-            ).set_position(('center', 0.8), relative=True)
-            
-            txt_clip = txt_clip.set_start(start_time)
-            txt_clip = txt_clip.set_duration(end_time - start_time)
-            
+                font=font,
+                fill=(255, 255, 255, 255)  # 白色文字
+            )
+
+            # 转换为 ImageClip
+            np_img = np.array(img)
+            txt_clip = ImageClip(np_img, ismask=False)
+            txt_clip = txt_clip.set_start(start_time).set_duration(end_time - start_time)
+            txt_clip = txt_clip.set_position(('center', 'bottom'))
+
             return txt_clip
         except Exception as e:
             logger.error(f"创建字幕失败: {str(e)}")
