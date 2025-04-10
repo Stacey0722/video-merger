@@ -1,0 +1,3 @@
+# 忽略输出视频文件
+output/*.mp4
+output/
