@@ -212,7 +212,7 @@ class VideoGenerator:
             
             # 使用 PIL 的 BILINEAR 重采样方法（更快但质量稍低）
             from PIL import Image
-            Image.Resampling = Image.Resampling.BILINEAR
+            Image.Resampling = Image.Resampling.LANCZOS
             
             # 调整视频大小
             video = video.resize((target_width, target_height))
