@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐素材库</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --border-color: #e0e0e0;
+            --category-color-male: #3498db;
+            --category-color-modern-sweet: #ff69b4;
+            --category-color-modern-urban: #2ecc71;
+            --category-color-ancient: #9b59b6;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color), #2c3e50);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .upload-area {
+            background-color: white;
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(74, 144, 226, 0.05);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+        
+        .upload-btn {
+            background: white;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .upload-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .upload-progress {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #f0f0f0;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .upload-status {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .music-card {
+            width: 400px;
+            height: 200px; /* 设置固定高度 */
+            margin: 10px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .music-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        
+        .music-info {
+            padding: 1.5rem;
+        }
+        
+        .music-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+        
+        .btn-delete {
+            background-color: #ff4d4f;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-delete:hover {
+            background-color: #ff7875;
+        }
+        
+        .btn-back {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        .empty-icon {
+            font-size: 4rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+        
+        .category-badge {
+            display: inline-block;
+            padding: 0.25rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            color: white;
+        }
+        
+        .badge-male {
+            background-color: var(--category-color-male);
+        }
+        
+        .badge-modern_sweet {
+            background-color: var(--category-color-modern-sweet);
+        }
+        
+        .badge-modern_urban {
+            background-color: var(--category-color-modern-urban);
+        }
+        
+        .badge-ancient {
+            background-color: var(--category-color-ancient);
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background-color: white;
+            border: 2px solid var(--border-color);
+        }
+        
+        .category-tab:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .category-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="mb-0">音乐素材库</h1>
+                <a href="/" class="btn btn-back">
+                    <i class="bi bi-arrow-left"></i> 返回首页
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- 类别选择 -->
+        <div class="category-tabs">
+            <div class="category-tab active" data-category="all">全部</div>
+            <div class="category-tab" data-category="male">男频</div>
+            <div class="category-tab" data-category="modern_sweet">现言甜宠</div>
+            <div class="category-tab" data-category="modern_urban">现言都市</div>
+            <div class="category-tab" data-category="ancient">古言</div>
+        </div>
+
+        <!-- 上传区域 -->
+        <div class="upload-area" id="uploadArea">
+            <i class="bi bi-music-note-beamed upload-icon"></i>
+            <h3>上传音乐素材</h3>
+            <p class="text-muted">支持 MP3, WAV, OGG 格式</p>
+            <div class="form-group mb-3">
+                <label for="categorySelect" class="form-label">选择音乐分类</label>
+                <select class="form-select" id="categorySelect">
+                    <option value="male">男频</option>
+                    <option value="modern_sweet">现言甜宠</option>
+                    <option value="modern_urban">现言都市</option>
+                    <option value="ancient">古言</option>
+                </select>
+            </div>
+            <div class="upload-options">
+                <label class="upload-btn">
+                    <i class="bi bi-file-earmark-music"></i>
+                    选择文件
+                    <input type="file" id="musicInput" accept=".mp3,.wav,.ogg" multiple style="display: none;">
+                </label>
+                <label class="upload-btn">
+                    <i class="bi bi-folder-plus"></i>
+                    选择文件夹
+                    <input type="file" id="folderInput" webkitdirectory directory multiple style="display: none;">
+                </label>
+            </div>
+            <div class="upload-progress" id="uploadProgress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="upload-status" id="uploadStatus">准备上传...</div>
+            </div>
+        </div>
+
+        <!-- 音乐列表 -->
+        <div class="row" id="musicList">
+            {% if music_files %}
+                {% for file in music_files %}
+                <div class="col-md-4 music-item" data-category="{{ file.category }}">
+                    <div class="music-card">
+                        <div class="music-info">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="music-title">{{ file.filename }}</h5>
+                                <span class="category-badge badge-{{ file.category }}">
+                                    {% if file.category == 'male' %}男频
+                                    {% elif file.category == 'modern_sweet' %}现言甜宠
+                                    {% elif file.category == 'modern_urban' %}现言都市
+                                    {% elif file.category == 'ancient' %}古言
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <audio controls class="w-100 mb-3">
+                                <source src="{{ url_for('static', filename='bgm/' + file.category + '/' + file.filename) }}" type="audio/mpeg">
+                                您的浏览器不支持音频播放。
+                            </audio>
+                            <button class="btn btn-delete delete-music" data-category="{{ file.category }}" data-filename="{{ file.filename }}">
+                                <i class="bi bi-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12" id="emptyState">
+                    <div class="empty-state">
+                        <i class="bi bi-music-note empty-icon"></i>
+                        <h3>暂无音乐素材</h3>
+                        <p>点击上方区域上传音乐</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 类别筛选
+        document.querySelectorAll('.category-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 更新激活状态
+                document.querySelector('.category-tab.active').classList.remove('active');
+                tab.classList.add('active');
+                
+                const category = tab.dataset.category;
+                const items = document.querySelectorAll('.music-item');
+                
+                // 如果选择"全部"则显示所有音乐
+                if (category === 'all') {
+                    items.forEach(item => item.style.display = 'block');
+                    
+                    // 检查是否有音乐项
+                    const hasMusic = document.querySelectorAll('.music-item').length > 0;
+                    document.getElementById('emptyState').style.display = hasMusic ? 'none' : 'block';
+                } else {
+                    let hasItems = false;
+                    
+                    // 筛选显示对应类别的音乐
+                    items.forEach(item => {
+                        if (item.dataset.category === category) {
+                            item.style.display = 'block';
+                            hasItems = true;
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                    
+                    // 如果筛选后没有音乐，显示空状态
+                    const emptyState = document.getElementById('emptyState');
+                    if (emptyState) {
+                        emptyState.style.display = hasItems ? 'none' : 'block';
+                    }
+                }
+            });
+        });
+        
+        // 上传进度显示
+        function showProgress(show) {
+            document.getElementById('uploadProgress').style.display = show ? 'block' : 'none';
+        }
+        
+        function updateProgress(current, total) {
+            const percent = (current / total) * 100;
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('uploadStatus').textContent = 
+                `正在上传 ${current}/${total} 个文件 (${Math.round(percent)}%)`;
+        }
+        
+        // 批量上传文件
+        async function uploadFiles(files) {
+            const category = document.getElementById('categorySelect').value;
+            showProgress(true);
+            let successCount = 0;
+            let failCount = 0;
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                // 检查是否为音频文件
+                if (!file.type.startsWith('audio/')) {
+                    failCount++;
+                    continue;
+                }
+                
+                const formData = new FormData();
+                formData.append('music', file);
+                formData.append('category', category);
+                
+                try {
+                    const response = await fetch('/upload_music', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (response.ok) {
+                        successCount++;
+                    } else {
+                        failCount++;
+                    }
+                } catch (error) {
+                    failCount++;
+                }
+                
+                updateProgress(i + 1, files.length);
+            }
+            
+            setTimeout(() => {
+                showProgress(false);
+                alert(`上传完成！\n成功：${successCount} 个文件\n失败：${failCount} 个文件`);
+                location.reload();
+            }, 1000);
+        }
+
+        // 文件选择事件
+        document.getElementById('musicInput').addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            if (files.length > 0) {
+                uploadFiles(files);
+            }
+        });
+
+        // 文件夹选择事件
+        document.getElementById('folderInput').addEventListener('change', (e) => {
+            const files = Array.from(e.target.files);
+            if (files.length > 0) {
+                uploadFiles(files);
+            }
+        });
+
+        // 拖拽上传
+        document.getElementById('uploadArea').addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.borderColor = 'var(--primary-color)';
+            e.currentTarget.style.backgroundColor = 'rgba(74, 144, 226, 0.1)';
+        });
+
+        document.getElementById('uploadArea').addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.borderColor = 'var(--border-color)';
+            e.currentTarget.style.backgroundColor = 'white';
+        });
+
+        document.getElementById('uploadArea').addEventListener('drop', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.currentTarget.style.borderColor = 'var(--border-color)';
+            e.currentTarget.style.backgroundColor = 'white';
+
+            // 获取所有文件，包括文件夹中的文件
+            const items = e.dataTransfer.items;
+            const files = [];
+            
+            function traverseFileTree(item, path) {
+                return new Promise(resolve => {
+                    if (item.isFile) {
+                        item.file(file => {
+                            if (file.type.startsWith('audio/')) {
+                                files.push(file);
+                            }
+                            resolve();
+                        });
+                    } else if (item.isDirectory) {
+                        const dirReader = item.createReader();
+                        dirReader.readEntries(entries => {
+                            const promises = entries.map(entry => traverseFileTree(entry, path + item.name + "/"));
+                            Promise.all(promises).then(resolve);
+                        });
+                    } else {
+                        resolve();
+                    }
+                });
+            }
+            
+            const promises = [];
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i].webkitGetAsEntry();
+                if (item) {
+                    promises.push(traverseFileTree(item, ""));
+                }
+            }
+            
+            await Promise.all(promises);
+            
+            if (files.length > 0) {
+                uploadFiles(files);
+            } else {
+                alert('没有找到可上传的音频文件');
+            }
+        });
+
+        // 删除音乐
+        document.querySelectorAll('.delete-music').forEach(button => {
+            button.addEventListener('click', async () => {
+                if (confirm('确定要删除这个音乐文件吗？')) {
+                    const filename = button.dataset.filename;
+                    const category = button.dataset.category;
+                    try {
+                        const response = await fetch(`/delete_music/${category}/${filename}`, {
+                            method: 'DELETE'
+                        });
+                        const result = await response.json();
+                        
+                        if (response.ok) {
+                            alert('删除成功！');
+                            location.reload();
+                        } else {
+                            alert('删除失败：' + result.error);
+                        }
+                    } catch (error) {
+                        alert('删除失败：' + error.message);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
