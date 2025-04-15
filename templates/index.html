@@ -17,14 +17,14 @@
             --gradient-start: #7B42F6;
             --gradient-end: #12ABDB;
         }
-        
+
         /* 添加动态背景效果 */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
+
         body {
             font-family: 'SF Pro Display', 'Segoe UI', Arial, sans-serif;
             margin: 0;
@@ -36,7 +36,7 @@
             overflow-y: auto;
             color: var(--text-color);
         }
-        
+
         /* 添加神经网络线条背景 */
         .ai-background {
             position: fixed;
@@ -48,7 +48,7 @@
             opacity: 0.08;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><line x1="10" y1="10" x2="90" y2="10" stroke="%237B42F6" stroke-width="0.5"/><line x1="10" y1="30" x2="90" y2="30" stroke="%237B42F6" stroke-width="0.5"/><line x1="10" y1="50" x2="90" y2="50" stroke="%237B42F6" stroke-width="0.5"/><line x1="10" y1="70" x2="90" y2="70" stroke="%237B42F6" stroke-width="0.5"/><line x1="10" y1="90" x2="90" y2="90" stroke="%237B42F6" stroke-width="0.5"/><line x1="10" y1="10" x2="10" y2="90" stroke="%2312ABDB" stroke-width="0.5"/><line x1="30" y1="10" x2="30" y2="90" stroke="%2312ABDB" stroke-width="0.5"/><line x1="50" y1="10" x2="50" y2="90" stroke="%2312ABDB" stroke-width="0.5"/><line x1="70" y1="10" x2="70" y2="90" stroke="%2312ABDB" stroke-width="0.5"/><line x1="90" y1="10" x2="90" y2="90" stroke="%2312ABDB" stroke-width="0.5"/></svg>');
         }
-        
+
         .container {
             max-width: 800px;
             margin: 30px auto;
@@ -60,7 +60,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(123, 66, 246, 0.1);
         }
-        
+
         .section {
             margin-bottom: 30px;
             padding: 25px;
@@ -70,14 +70,14 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
+
         .section-title {
             font-size: 1.4em;
             color: var(--highlight-color);
             margin-bottom: 20px;
             font-weight: 600;
         }
-        
+
         /* 主标题效果 */
         .main-title {
             font-weight: 800;
@@ -98,17 +98,17 @@
             transform: perspective(500px) rotateX(5deg);
             transition: transform 0.3s;
         }
-        
+
         @keyframes titlePulse {
             0% { text-shadow: 0 0 10px rgba(123, 66, 246, 0.4), 0 0 20px rgba(123, 66, 246, 0); }
             50% { text-shadow: 0 0 15px rgba(123, 66, 246, 0.6), 0 0 30px rgba(18, 171, 219, 0.4), 0 0 40px rgba(65, 232, 179, 0.2); }
             100% { text-shadow: 0 0 10px rgba(123, 66, 246, 0.4), 0 0 20px rgba(123, 66, 246, 0); }
         }
-        
+
         .main-title:hover {
             transform: perspective(500px) rotateX(0deg) scale(1.05);
         }
-        
+
         /* 标题装饰元素 */
         .title-decoration {
             display: flex;
@@ -118,7 +118,7 @@
             width: 80%;
             max-width: 500px;
         }
-        
+
         .circle {
             width: 15px;
             height: 15px;
@@ -127,7 +127,7 @@
             position: relative;
             animation: circlePulse 3s infinite alternate;
         }
-        
+
         .circle::before {
             content: '';
             position: absolute;
@@ -141,15 +141,15 @@
             z-index: -1;
             animation: circleGlow 3s infinite alternate;
         }
-        
+
         .circle-left {
             animation-delay: 0s;
         }
-        
+
         .circle-right {
             animation-delay: 0.5s;
         }
-        
+
         .line {
             flex-grow: 1;
             height: 2px;
@@ -157,7 +157,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .line::after {
             content: '';
             position: absolute;
@@ -168,22 +168,22 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
             animation: lineScan 3s infinite;
         }
-        
+
         @keyframes circlePulse {
             0% { transform: scale(1); }
             100% { transform: scale(1.3); }
         }
-        
+
         @keyframes circleGlow {
             0% { opacity: 0.2; transform: scale(1); }
             100% { opacity: 0.6; transform: scale(1.5); }
         }
-        
+
         @keyframes lineScan {
             0% { left: -100%; }
             100% { left: 100%; }
         }
-        
+
         /* 改进副标题效果 */
         .subtitle {
             color: var(--secondary-color);
@@ -194,7 +194,7 @@
             width: fit-content;
             padding: 0 20px;
         }
-        
+
         .subtitle::before,
         .subtitle::after {
             content: "";
@@ -204,23 +204,23 @@
             height: 1px;
             background: linear-gradient(to right, transparent, var(--secondary-color));
         }
-        
+
         .subtitle::before {
             left: -20px;
             transform: scaleX(-1);
         }
-        
+
         .subtitle::after {
             right: -20px;
         }
-        
+
         /* AI效果的脉冲动画 */
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(123, 66, 246, 0.4); }
             70% { box-shadow: 0 0 0 10px rgba(123, 66, 246, 0); }
             100% { box-shadow: 0 0 0 0 rgba(123, 66, 246, 0); }
         }
-        
+
         h3 {
             color: var(--secondary-color);
             font-weight: 500;
@@ -229,7 +229,7 @@
             font-size: 1.2rem;
             letter-spacing: 0.5px;
         }
-        
+
         .upload-area {
             border: 2px dashed var(--border-color);
             padding: 20px;
@@ -240,17 +240,17 @@
             transition: all 0.3s ease;
             background: rgba(26, 32, 53, 0.5);
         }
-        
+
         .upload-area:hover {
             border-color: var(--secondary-color);
             background-color: rgba(18, 171, 219, 0.1);
         }
-        
+
         .upload-area.dragover {
             border-color: var(--highlight-color);
             background-color: rgba(65, 232, 179, 0.1);
         }
-        
+
         .material-list {
             margin: 10px 0;
             padding: 15px;
@@ -259,7 +259,7 @@
             max-height: 200px;
             overflow-y: auto;
         }
-        
+
         .material-item {
             display: flex;
             justify-content: space-between;
@@ -267,17 +267,17 @@
             padding: 8px;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         .material-item:last-child {
             border-bottom: none;
         }
-        
+
         .remove-material {
             color: #ff5d6e;
             cursor: pointer;
             padding: 0 10px;
         }
-        
+
         textarea {
             width: 100%;
             height: 150px;
@@ -293,7 +293,7 @@
             line-height: 1.5;
             transition: all 0.3s ease;
         }
-        
+
         select, input {
             width: 100%;
             padding: 12px 15px;
@@ -304,13 +304,13 @@
             color: var(--text-color);
             transition: all 0.3s;
         }
-        
+
         select:focus, input:focus, textarea:focus {
             border-color: var(--primary-color);
             outline: none;
             box-shadow: 0 0 0 2px rgba(123, 66, 246, 0.3);
         }
-        
+
         button {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
@@ -328,12 +328,12 @@
             box-shadow: 0 4px 15px rgba(123, 66, 246, 0.3);
             letter-spacing: 1px;
         }
-        
+
         button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(123, 66, 246, 0.4);
         }
-        
+
         button:after {
             content: '';
             position: absolute;
@@ -344,19 +344,19 @@
             background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
             transform: translateX(-100%);
         }
-        
+
         button:hover:after {
             transform: translateX(100%);
             transition: transform 0.5s ease-in-out;
         }
-        
+
         button:disabled {
             background: #3a3f52;
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
         }
-        
+
         .progress {
             display: none;
             margin: 20px 0;
@@ -366,13 +366,13 @@
             border: 1px solid var(--border-color);
             box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         .progress h3 {
             text-align: center;
             margin-bottom: 15px;
             color: var(--highlight-color);
         }
-        
+
         .progress-bar {
             width: 100%;
             height: 15px;
@@ -383,7 +383,7 @@
             position: relative;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
-        
+
         .progress-bar::before {
             content: '';
             position: absolute;
@@ -395,7 +395,7 @@
             border-radius: 8px 8px 0 0;
             z-index: 1;
         }
-        
+
         .progress-fill {
             width: 0%;
             height: 100%;
@@ -407,12 +407,12 @@
             position: relative;
             box-shadow: 0 0 8px rgba(123, 66, 246, 0.5);
         }
-        
+
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
-        
+
         #progress-text {
             text-align: center;
             margin-top: 12px;
@@ -420,7 +420,7 @@
             font-size: 0.95rem;
             position: relative;
         }
-        
+
         .progress-percentage {
             position: absolute;
             right: 10px;
@@ -432,45 +432,45 @@
             z-index: 2;
             text-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
         }
-        
+
         .error-message {
             color: #ff5d6e;
             margin: 5px 0;
             font-size: 14px;
         }
-        
+
         .success-message {
             color: var(--highlight-color);
             margin: 5px 0;
             font-size: 14px;
         }
-        
+
         .status {
             margin: 10px 0;
             padding: 15px;
             border-radius: 12px;
             display: none;
         }
-        
+
         .status.error {
             background-color: rgba(255, 93, 110, 0.1);
             color: #ff5d6e;
             border: 1px solid rgba(255, 93, 110, 0.3);
         }
-        
+
         .status.success {
             background-color: rgba(65, 232, 179, 0.1);
             color: var(--highlight-color);
             border: 1px solid rgba(65, 232, 179, 0.3);
         }
-        
+
         .generated-videos {
             margin-top: 20px;
             padding: 15px;
             background-color: rgba(15, 22, 36, 0.5);
             border-radius: 12px;
         }
-        
+
         .generated-video-item {
             display: flex;
             justify-content: space-between;
@@ -478,22 +478,22 @@
             padding: 10px;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         .generated-video-item:last-child {
             border-bottom: none;
         }
-        
+
         .download-link {
             color: var(--highlight-color);
             text-decoration: none;
             transition: color 0.2s;
         }
-        
+
         .download-link:hover {
             text-decoration: underline;
             color: #5affcc;
         }
-        
+
         /* 按钮容器 */
         .button-container {
             display: flex;
@@ -502,7 +502,7 @@
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .btn-library {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             color: white;
@@ -522,22 +522,22 @@
             width: 180px;
             justify-content: center;
         }
-        
+
         .btn-library:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(123, 66, 246, 0.4);
             color: white;
             text-decoration: none;
         }
-        
+
         .btn-library i {
             font-size: 20px;
         }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .form-group label {
             display: block;
             margin-bottom: 10px;
@@ -545,7 +545,7 @@
             font-weight: 500;
             font-size: 1rem;
         }
-        
+
         .form-control {
             width: 100%;
             padding: 12px 15px;
@@ -556,23 +556,23 @@
             background-color: rgba(15, 22, 36, 0.7);
             color: var(--text-color);
         }
-        
+
         .form-control:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(123, 66, 246, 0.2);
         }
-        
+
         .form-control:hover {
             border-color: var(--secondary-color);
         }
-        
+
         .number-input-group {
             display: flex;
             gap: 20px;
             margin-bottom: 20px;
         }
-        
+
         .number-input-container {
             flex: 1;
             background: rgba(26, 32, 53, 0.6);
@@ -581,7 +581,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 1px solid var(--border-color);
         }
-        
+
         .number-input-container label {
             display: block;
             margin-bottom: 10px;
@@ -589,7 +589,7 @@
             font-weight: 500;
             font-size: 1rem;
         }
-        
+
         .number-input-container input[type="number"] {
             width: calc(100% - 30px);
             padding: 12px 15px;
@@ -600,19 +600,19 @@
             background-color: rgba(15, 22, 36, 0.7);
             color: var(--text-color);
         }
-        
+
         .number-input-container input[type="number"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(123, 66, 246, 0.2);
         }
-        
+
         .number-input-container .hint {
             margin-top: 8px;
             font-size: 0.9rem;
             color: #8b93a7;
         }
-        
+
         /* AI徽章样式 */
         .ai-badge {
             display: inline-block;
@@ -629,7 +629,7 @@
             overflow: hidden;
             animation: badgePulse 3s infinite ease-in-out;
         }
-        
+
         .ai-badge::before {
             content: "";
             position: absolute;
@@ -641,19 +641,19 @@
             transition: 0.5s;
             animation: shine 3s infinite;
         }
-        
+
         @keyframes shine {
             0% { left: -100%; }
             20% { left: 100%; }
             100% { left: 100%; }
         }
-        
+
         @keyframes badgePulse {
             0% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
             100% { transform: translateY(0); }
         }
-        
+
         /* 标题容器样式 */
         .title-container {
             text-align: center;
@@ -666,7 +666,7 @@
             backdrop-filter: blur(5px);
             overflow: hidden;
         }
-        
+
         /* 添加动态粒子背景 */
         .title-container .particle {
             position: absolute;
@@ -677,7 +677,7 @@
             opacity: 0.2;
             animation: float 15s infinite linear;
         }
-        
+
         .title-container .particle:nth-child(1) {
             top: 20%;
             left: 10%;
@@ -685,14 +685,14 @@
             width: 8px;
             height: 8px;
         }
-        
+
         .title-container .particle:nth-child(2) {
             top: 60%;
             left: 80%;
             animation-duration: 25s;
             animation-delay: 2s;
         }
-        
+
         .title-container .particle:nth-child(3) {
             top: 40%;
             left: 40%;
@@ -701,21 +701,21 @@
             width: 10px;
             height: 10px;
         }
-        
+
         .title-container .particle:nth-child(4) {
             top: 10%;
             left: 70%;
             animation-duration: 22s;
             animation-delay: 6s;
         }
-        
+
         .title-container .particle:nth-child(5) {
             top: 70%;
             left: 20%;
             animation-duration: 19s;
             animation-delay: 8s;
         }
-        
+
         @keyframes float {
             0% {
                 transform: translateY(0) rotate(0deg);
@@ -736,14 +736,14 @@
                 opacity: 0.2;
             }
         }
-        
+
         /* 输入框聚焦时的高亮效果 */
         textarea:focus, select:focus, input:focus {
             border-color: var(--primary-color);
             box-shadow: 0 0 0 2px rgba(123, 66, 246, 0.3), 0 0 15px rgba(123, 66, 246, 0.2);
             transition: all 0.3s ease;
         }
-        
+
         /* 帮助文字样式 */
         .help-text {
             color: #8b93a7;
@@ -752,36 +752,36 @@
             margin-bottom: 20px;
             font-style: italic;
         }
-        
+
         /* 移动端适配 */
         @media (max-width: 768px) {
             .container {
                 margin: 15px;
                 padding: 20px;
             }
-            
+
             .button-container {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             .btn-library {
                 width: 100%;
             }
-            
+
             .number-input-group {
                 flex-direction: column;
                 gap: 15px;
             }
-            
+
             .main-title {
                 font-size: 2.2rem;
             }
-            
+
             .title-decoration {
                 width: 100%;
             }
-            
+
             .ai-badge {
                 padding: 4px 12px;
                 font-size: 0.7rem;
@@ -809,7 +809,7 @@
             </div>
             <p class="subtitle">输入文本一键生成解压类素材</p>
         </div>
-        
+
         <div class="button-container">
             <a href="/music_library" class="btn-library">
                 <i class="bi bi-music-note-list"></i>
@@ -820,9 +820,9 @@
                 视频素材库
             </a>
         </div>
-        
+
         <div class="status" id="status"></div>
-        
+
         <!-- 视频生成部分 -->
         <div class="section">
             <div>
@@ -830,7 +830,7 @@
                 <textarea id="text-input" placeholder="请输入要转换为语音的文本..."></textarea>
                 <div class="error-message" id="text-error"></div>
             </div>
-            
+
             <div>
                 <h3>小说类型</h3>
                 <select id="novel-type" class="form-control">
@@ -841,7 +841,7 @@
                 </select>
                 <p class="help-text">选择小说类型，系统将自动匹配合适的背景音乐</p>
             </div>
-            
+
             <div>
                 <h3>选择语音</h3>
                 <select id="voice-select" class="form-control">
@@ -851,7 +851,7 @@
                     <option value="zh-CN-YunyangNeural">云扬（男声）</option>
                 </select>
             </div>
-            
+
             <!-- 字体选择部分 -->
             <div>
                 <h3>选择字幕字体</h3>
@@ -867,7 +867,7 @@
                     <option value="FangSong">仿宋 (FangSong)</option>
                 </select>
             </div>
-            
+
             <div class="number-input-group">
                 <div class="number-input-container">
                     <label for="video-count">生成视频数量</label>
@@ -881,7 +881,7 @@
                     <div class="hint">请选择6-24之间的数值</div>
                 </div>
             </div>
-            
+
             <div class="progress" id="progress">
                 <h3>处理进度</h3>
                 <div class="progress-bar">
@@ -891,10 +891,10 @@
                 </div>
                 <p id="progress-text">正在准备处理...</p>
             </div>
-            
+
             <button id="generate-btn">生成视频</button>
         </div>
-        
+
         <!-- 生成的视频列表 -->
         <div class="section" id="generated-videos-section" style="display: none;">
             <h2 class="section-title">生成的视频</h2>
@@ -954,31 +954,31 @@
         async function handleFileUpload(input, type) {
             const files = input.files;
             const errorDiv = document.getElementById(`${type}-error`);
-            
+
             errorDiv.textContent = '';
-            
+
             for (let file of files) {
                 const formData = new FormData();
                 formData.append('file', file);
                 formData.append('type', type);
-                
+
                 try {
                     const response = await fetch('/upload_material', {
                         method: 'POST',
                         body: formData
                     });
-                    
+
                     if (!response.ok) {
                         const error = await response.json();
                         throw new Error(error.error || '上传失败');
                     }
-                    
+
                     showStatus('文件上传成功', 'success');
                 } catch (error) {
                     showStatus(error.message, 'error');
                 }
             }
-            
+
             loadMaterials();
         }
 
@@ -999,17 +999,17 @@
             e.preventDefault();
             e.stopPropagation();
             this.classList.remove('dragover');
-            
+
             const files = e.dataTransfer.files;
             const type = this.id === 'bgm-upload' ? 'bgm' : 'video';
             const input = document.getElementById(`${type}-input`);
-            
+
             if (type === 'video') {
                 input.multiple = true;
             } else {
                 input.multiple = false;
             }
-            
+
             input.files = files;
             handleFileUpload(input, type);
         }
@@ -1027,29 +1027,29 @@
             const voice = document.getElementById('voice-select').value;
             const subtitleLength = parseInt(document.getElementById('subtitle-length').value);
             const font = document.getElementById('font-select').value;
-            
+
             // 验证输入
             if (!text) {
                 textError.textContent = '请输入要转换为语音的文本';
                 return;
             }
-            
+
             if (videoCount < 1) {
                 showStatus('视频数量必须大于等于1', 'error');
                 return;
             }
-            
+
             if (subtitleLength < 6 || subtitleLength > 24) {
                 showStatus('字幕长度必须在6-24之间', 'error');
                 return;
             }
-            
+
             // 禁用生成按钮
             generateBtn.disabled = true;
             progress.style.display = 'block';
             progressFill.style.width = '0%';
             progressText.textContent = '正在准备处理...';
-            
+
             try {
                 // 创建 FormData 对象
                 const formData = new FormData();
@@ -1059,24 +1059,24 @@
                 formData.append('video_count', videoCount);
                 formData.append('subtitle_length', subtitleLength);
                 formData.append('font', font);
-                
+
                 // 开始轮询进度
                 startProgressPolling();
-                
+
                 // 发送请求
                 const response = await fetch('/generate', {
                     method: 'POST',
                     body: formData
                 });
-                
+
                 if (!response.ok) {
                     const error = await response.json();
                     throw new Error(error.error || '生成视频时出错');
                 }
-                
+
                 const result = await response.json();
                 showStatus(result.message, 'success');
-                
+
                 // 显示生成的视频列表
                 const generatedVideosSection = document.getElementById('generated-videos-section');
                 const generatedVideos = document.getElementById('generated-videos');
@@ -1087,7 +1087,7 @@
                     </div>
                 `).join('');
                 generatedVideosSection.style.display = 'block';
-                
+
             } catch (error) {
                 showStatus(error.message, 'error');
                 progressFill.style.width = '0%';
@@ -1101,7 +1101,7 @@
                 }, 1000);
             }
         }
-        
+
         // 查询实际处理进度
         async function checkProcessProgress() {
             try {
@@ -1113,14 +1113,14 @@
                         const progressFill = document.querySelector('.progress-fill');
                         const progressText = document.getElementById('progress-text');
                         const progressPercentage = document.querySelector('.progress-percentage');
-                        
+
                         // 平滑过渡动画
                         let currentWidth = parseFloat(progressFill.style.width) || 0;
                         if (currentWidth < data.progress) {
                             // 定义动画步长和目标进度
                             const targetProgress = data.progress;
                             const step = (targetProgress - currentWidth) / 5; // 分5步平滑过渡
-                            
+
                             // 使用requestAnimationFrame实现平滑过渡
                             const animate = () => {
                                 currentWidth += step;
@@ -1137,18 +1137,18 @@
                                 progressPercentage.textContent = `${Math.round(currentWidth)}%`;
                                 requestAnimationFrame(animate);
                             };
-                            
+
                             animate();
                         } else {
                             // 如果进度减少（可能是错误）直接设置
                             progressFill.style.width = `${data.progress}%`;
                             progressPercentage.textContent = `${Math.round(data.progress)}%`;
                         }
-                        
+
                         if (data.stage) {
                             progressText.textContent = data.stage;
                         }
-                        
+
                         // 如果处理失败
                         if (data.progress < 0) {
                             stopProgressPolling();
@@ -1156,7 +1156,7 @@
                             progressPercentage.textContent = '0%';
                             progressText.textContent = '处理失败';
                         }
-                        
+
                         // 如果处理完成
                         if (data.progress >= 100) {
                             stopProgressPolling();
@@ -1170,10 +1170,10 @@
                 console.log('获取进度信息失败，继续使用模拟进度');
             }
         }
-        
+
         // 进度轮询
         let progressInterval;
-        
+
         function startProgressPolling() {
             // 初始化进度显示
             const progressFill = document.querySelector('.progress-fill');
@@ -1181,11 +1181,11 @@
             const progressPercentage = document.querySelector('.progress-percentage');
             progressFill.style.width = '0%';
             progressPercentage.textContent = '0%';
-            
+
             // 设置轮询，每500ms查询一次进度
             progressInterval = setInterval(checkProcessProgress, 500);
         }
-        
+
         function stopProgressPolling() {
             if (progressInterval) {
                 clearInterval(progressInterval);
@@ -1197,18 +1197,18 @@
         document.addEventListener('DOMContentLoaded', () => {
             // 绑定生成视频按钮的点击事件
             const generateBtn = document.getElementById('generate-btn');
-            
+
             if (generateBtn) {
                 generateBtn.addEventListener('click', generateVideo);
             }
-            
+
             // 加载素材列表
             loadMaterials();
-            
+
             // 背景音乐上传区域
             const bgmUpload = document.getElementById('bgm-upload');
             const bgmInput = document.getElementById('bgm-input');
-            
+
             bgmUpload.addEventListener('click', () => bgmInput.click());
             bgmUpload.addEventListener('dragover', handleDragOver);
             bgmUpload.addEventListener('dragleave', handleDragLeave);
@@ -1217,4 +1217,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

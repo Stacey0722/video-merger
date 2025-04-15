@@ -11,4 +11,3 @@ services:
       - key: FLASK_ENV
         value: development
       - key: IMAGE_MAGICK_BINARY
-        value: /usr/bin/convert
