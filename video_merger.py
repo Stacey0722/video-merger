@@ -11,10 +11,22 @@ from moviepy.config import change_settings
 from PIL import Image, ImageDraw, ImageFont
 import os
 
-# 配置 ImageMagick
-# os.environ['IMAGEMAGICK_BINARY'] = '/usr/bin/convert'
-change_settings({"IMAGEMAGICK_BINARY": "/opt/homebrew/bin/convert"})
+# # 新增
+# image = image.resize((w, h), Image.Resampling.LANCZOS)
 
+# # 配置 ImageMagick
+# # os.environ['IMAGEMAGICK_BINARY'] = '/usr/bin/convert'
+# change_settings({"IMAGEMAGICK_BINARY": "/opt/homebrew/bin/convert"})
+
+import platform
+from moviepy.config import change_settings
+
+if platform.system() == "Darwin":
+    # macOS
+    change_settings({"IMAGEMAGICK_BINARY": "/opt/homebrew/bin/convert"})
+else:
+    # Linux (Render)、Windows 等
+    change_settings({"IMAGEMAGICK_BINARY": "/usr/bin/convert"})
 
 logger = logging.getLogger(__name__)
 
